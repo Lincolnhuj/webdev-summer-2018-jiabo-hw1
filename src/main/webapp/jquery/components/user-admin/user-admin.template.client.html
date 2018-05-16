@@ -4,10 +4,24 @@
 <meta charset="UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/> <!-- load bootstrap to make it prettier -->
 <title>Insert title here</title>
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+<!-- script should be inside header tag. However, that would make browser download all dependencies first before display anything -->
+<!-- Adding javascript libraries at the bottom of body tag will show contents first.-->
+<!-- However,if we put it inside body, jQuery will not be defined. So we have to put it in the head-->
+
+	<script src="user-admin.controller.client.js"></script> <!-- Our script -->
 </head>
 <body>
 <div class="container"> <!-- container is a bootstrap class to add responsiveness -->
-	<h1>User Admin</h1>
+	<h1 id="title">User Admin</h1> <!-- If we have many h1 and we want to treat the separately, we have to add id as identification -->
+	<h1 class="red">Red</h1>
+	<h1 class="red">Also Red</h1>
+	<h1 class="green">Green</h1>
+	<h1 class="green">Also Green</h1>
+	<h1 class="blue">Blue</h1>
 	<table class="table"> <!-- bootstrap table class is prettier -->
 		<thead>
 			<tr> <!-- A table row -->
@@ -27,24 +41,23 @@
 				<th><button class="btn btn-success">Create</button></th> <!-- success is money is green -->
 			</tr>
 		
-			<tr> 
-				<td>alice</td> <!-- table row data -->
+			<tr class="template"> 
+				<td class="username">alice</td> <!-- table row data -->
 				<td>****</td>
 				<td>Alice</td>
 				<td>Wonderland</td>
 				<th><button class="btn btn-danger">Delete</button></th> <!-- red is danger -->
 			</tr>
 			
-			<tr> 
-				<td>bob</td> <!-- table row data -->
-				<td>****</td>
-				<td>Bob</td>
-				<td>Hope</td>
-				<th><button class="btn btn-danger">Delete</button></th>
 			</tr>
 		</tbody>
 		<tfoot></tfoot>
 	</table>
+	<h1>This is another h1</h1>
+	
 </div>
+
+
+
 </body>
 </html>
