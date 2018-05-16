@@ -18,7 +18,14 @@ public class UserService {
 	@Autowired // instead of us instantiating repo, we ask a framework to inject it into that variable
 	UserRepository repository;
 	
-	// exe this function when I ask for all users
+	// enable post
+	@PostMapping("/api/user")
+	public User createUser(@RequestBody User user) {
+		return repository.save(user); // generate a insert into db. Return the user instance
+	}
+	
+	
+	// exe this function when I ask for all users. Enable get
 	@GetMapping("/api/user")  // this is mapped to a get request
 	public List<User> findAllUsers(){
 		return (List<User>) repository.findAll(); // select * to user

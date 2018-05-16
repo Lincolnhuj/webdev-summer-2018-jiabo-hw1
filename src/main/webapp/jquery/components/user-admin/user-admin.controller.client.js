@@ -6,12 +6,41 @@
 	function main(){ 
 		tbody = $('tbody');
 		template = $('.template');
+		$('#createUser').click(createUser); // click event handler. When it is clicked, the callback will be called
+		
 		// fetch user from url. Get data from server rather than hard code.
+		// default, fetch generates a get.
 		var promise = fetch('http://localhost:8080/api/user'); // here we won't get a users, but a promise
 		// register for the promise call back.
 		promise.then(function(response){
 			return response.json(); // We have to convert raw response to json for further use.
 		}).then(renderUsers);
+	}
+	
+	function createUser(){
+		console.log('createUser');
+		var username = $('#usernameFld').val(); // grab the value
+		var password = $('#passwordFld').val();
+		var firstName = $('#firstNameFld').val();
+		var lastName = $('#lastNameFld').val();
+		
+		// a user object that we can send over http request
+		var user={
+				username: username,
+				password: password,
+				firstName: firstName,
+				lastName: lastName
+		}
+		
+		// send it over the server for storing
+		// if fetch a post, we have to explicitly say.
+		fetch('http://localhost:8080/api/user', {
+			method: 'post',
+			body: JSON.stringify(user),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
 	}
 	
 	function renderUsers(users){
