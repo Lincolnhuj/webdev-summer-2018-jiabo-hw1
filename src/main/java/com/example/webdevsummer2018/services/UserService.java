@@ -15,7 +15,7 @@ import com.example.webdevsummer2018.repositories.UserRepository;
 @RestController 
 public class UserService {
 // retrieve all the users
-	@Autowired // instead of us instatiating repo, we ask a framework to inject it into that variable
+	@Autowired // instead of us instantiating repo, we ask a framework to inject it into that variable
 	UserRepository repository;
 	
 	// exe this function when I ask for all users
