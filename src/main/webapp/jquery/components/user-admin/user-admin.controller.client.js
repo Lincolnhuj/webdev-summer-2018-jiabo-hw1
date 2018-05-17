@@ -3,6 +3,8 @@
 
 	var tbody;
 	var template;
+	var userService = new UserServiceClient();
+	
 	function main(){ 
 		tbody = $('tbody');
 		template = $('.template');
@@ -30,17 +32,12 @@
 				password: password,
 				firstName: firstName,
 				lastName: lastName
-		}
+		};
 		
-		// send it over the server for storing
-		// if fetch a post, we have to explicitly say.
-		fetch('http://localhost:8080/api/user', {
-			method: 'post',
-			body: JSON.stringify(user),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
+		
+		userService.createUser(user);
+		
+
 	}
 	
 	function renderUsers(users){
