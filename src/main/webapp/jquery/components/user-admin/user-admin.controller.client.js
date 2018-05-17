@@ -1,6 +1,6 @@
 (function(){
 	jQuery(main); 
-
+// 3 this file!
 	var tbody;
 	var template;
 	var userService = new UserServiceClient();
@@ -9,14 +9,17 @@
 		tbody = $('tbody');
 		template = $('.template');
 		$('#createUser').click(createUser); // click event handler. When it is clicked, the callback will be called
-		
-		// fetch user from url. Get data from server rather than hard code.
-		// default, fetch generates a get.
-		var promise = fetch('http://localhost:8080/api/user'); // here we won't get a users, but a promise
-		// register for the promise call back.
-		promise.then(function(response){
-			return response.json(); // We have to convert raw response to json for further use.
-		}).then(renderUsers);
+        findAllUsers();
+	}
+
+	function findAllUsers(){
+        // fetch user from url. Get data from server rather than hard code.
+        // default, fetch generates a get.
+        var promise = fetch('http://localhost:8080/api/user'); // here we won't get a users, but a promise
+        // register for the promise call back.
+        promise.then(function(response){
+            return response.json(); // We have to convert raw response to json for further use.
+        }).then(renderUsers);
 	}
 	
 	function createUser(){
@@ -35,7 +38,9 @@
 		};
 		
 		
-		userService.createUser(user);
+		userService
+			.createUser(user)
+			.then(findAllUsers); // enable auto refresh after creating a user
 		
 
 	}
