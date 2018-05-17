@@ -36,12 +36,11 @@
 		
 		userService
 			.createUser(user)
-			.then(rerenderAfterCreation(user)); // enable auto refresh after creating a user
-		
-
+			.then(findAllUsers); // enable auto refresh after creating a user
 	}
 	
 	function renderUsers(users){
+		tbody.empty(); // clear out the tbody.
 		for(var i = 0; i < users.length; i++){ // generate contents from the array
 			var user = users[i];
 			var clone = template.clone(); // in memory Dom element
@@ -63,20 +62,6 @@
 
 	}
 
-    function rerenderAfterCreation(user){
-		var clone = template.clone(); // in memory Dom element
-        clone.attr('id', user.id); //distinguisher. The generated html will be tagged with id.
-		clone.find('.username') // find the class in html.
-			.html(user.username);
-		clone.find('.password')
-			.html(user.password);
-		clone.find('.firstName')
-			.html(user.firstName);
-		clone.find('.lastName')
-			.html(user.lastName);
-		clone.click(deleteUser);
-		tbody.append(clone); //  append rows after the table.
-    }
 
 	function deleteUser(event){
 
@@ -86,7 +71,9 @@
 			.parent()
 			.attr('id'); // user id is granParentId
 
-		// userService.deleteUser(userId);
+		userService
+			.deleteUser(userId)
+			.then(findAllUsers);
 	}
 
     function editUser(event){

@@ -3,7 +3,9 @@ package com.example.webdevsummer2018.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,11 @@ public class UserService {
 // retrieve all the users
 	@Autowired // instead of us instantiating repo, we ask a framework to inject it into that variable
 	UserRepository repository;
+	
+	@DeleteMapping("/api/user/{userId}") //--->|
+	public void deleteUser(@PathVariable("userId") int id) { // parse the userId to an int
+		repository.deleteById(id);
+	}
 	
 	// enable post
 	@PostMapping("/api/user")

@@ -3,11 +3,18 @@ function UserServiceClient(){
 	// out, or the browser will not run this js properly.
 	this.findAllUsers = findAllUsers;
 //	this.findUserById = findUserById;
-//	this.deleteUser = deleteUser;
+	this.deleteUser = deleteUser;
 //	this.updateUser = updateUser;
 	this.url = 
 		'http://localhost:8080/api/user';
 	var self = this; // self refers to this instance. It will be used later. this only refers to this object, not the whole class.
+
+	function deleteUser(userId){
+        return fetch(self.url + '/' + userId, {
+        	method: 'delete'
+		});
+	}
+
 
 	function findAllUsers(){
         // fetch user from url. Get data from server rather than hard code.
