@@ -45,6 +45,9 @@
 		for(var i = 0; i < users.length; i++){ // generate contents from the array
 			var user = users[i];
 			var clone = template.clone(); // in memory Dom element
+
+			clone.attr('id', user.id); //distinguisher. The generated html will be tagged with id.
+
 			clone.find('.username') // find the class in html.
 				.html(user.username);
             clone.find('.password')
@@ -53,23 +56,49 @@
                 .html(user.firstName);
             clone.find('.lastName')
                 .html(user.lastName);
+			clone.find('.delete').click(deleteUser);
+            clone.find('.edit').click(editUser);
 			tbody.append(clone); //  append rows after the table.
 		}
 
 	}
 
     function rerenderAfterCreation(user){
-            var clone = template.clone(); // in memory Dom element
-            clone.find('.username') // find the class in html.
-                .html(user.username);
-            clone.find('.password')
-                .html(user.password);
-            clone.find('.firstName')
-                .html(user.firstName);
-            clone.find('.lastName')
-                .html(user.lastName);
-            tbody.append(clone); //  append rows after the table.
+		var clone = template.clone(); // in memory Dom element
+        clone.attr('id', user.id); //distinguisher. The generated html will be tagged with id.
+		clone.find('.username') // find the class in html.
+			.html(user.username);
+		clone.find('.password')
+			.html(user.password);
+		clone.find('.firstName')
+			.html(user.firstName);
+		clone.find('.lastName')
+			.html(user.lastName);
+		clone.click(deleteUser);
+		tbody.append(clone); //  append rows after the table.
     }
+
+	function deleteUser(event){
+
+		var deleteBtn = $(event.currentTarget); // raw DOM to jQuery Dom. Easier to manipulate
+		var userId = deleteBtn
+			.parent()
+			.parent()
+			.attr('id'); // user id is granParentId
+
+		// userService.deleteUser(userId);
+	}
+
+    function editUser(event){
+        var editBtn = $(event.currentTarget);
+        var userId = editBtn
+            .parent()
+            .parent()
+            .attr('id'); // user id is granParentId
+        // userService.editUser(userId);
+    }
+
+
 })();
 
 
