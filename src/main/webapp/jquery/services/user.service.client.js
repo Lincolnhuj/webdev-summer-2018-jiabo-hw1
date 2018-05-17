@@ -16,9 +16,13 @@ function UserServiceClient(){
             headers: {
                 'content-type': 'application/json'
             }
-		})
-		.then(function(response){
-			return response.json();
+		}).then(function(response){
+			if(response.ok){ // here should use ok rather than bodyused.
+                return response.json();
+			}else{
+                return null;
+            }
+
 		});
 	}
 

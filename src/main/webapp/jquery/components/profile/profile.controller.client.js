@@ -11,7 +11,7 @@
 
     function init(){
         // fetch user by id
-        $staticEmail = $("#staticEmail")
+        $staticEmail = $("#staticEmail");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
         $updateBtn = $("#updateBtn")
@@ -23,7 +23,7 @@
         var user = {
             firstName: $firstName.val(),
             lastName: $lastName.val()
-        }
+        };
 
         userService
             .updateUser(22,user)
@@ -31,8 +31,13 @@
 
     }
 
-    function success(){
-        alert("success");
+    function success(response){
+        if(response == null){
+            alert('unable to update');
+        } else{
+            alert("success");
+        }
+
     }
 
     function findUserById(userId){
