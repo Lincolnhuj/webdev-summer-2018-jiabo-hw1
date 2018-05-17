@@ -2,12 +2,20 @@ function UserServiceClient(){
 	this.createUser = createUser; // if the following is not defined, please comment them
 	// out, or the browser will not run this js properly.
 	this.findAllUsers = findAllUsers;
-//	this.findUserById = findUserById;
+	this.findUserById = findUserById;
 	this.deleteUser = deleteUser;
 //	this.updateUser = updateUser;
-	this.url = 
+	this.url =
 		'http://localhost:8080/api/user';
 	var self = this; // self refers to this instance. It will be used later. this only refers to this object, not the whole class.
+
+	function findUserById(userId){
+        return fetch(self.url + '/' + userId)
+			.then(function(response){
+				return response.json();
+			});
+	}
+
 
 	function deleteUser(userId){
         return fetch(self.url + '/' + userId, {
@@ -39,6 +47,6 @@ function UserServiceClient(){
 			}
 		}); // return a promise
 	}
-	
-	
+
+
 }

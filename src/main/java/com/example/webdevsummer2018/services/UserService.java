@@ -1,6 +1,7 @@
 package com.example.webdevsummer2018.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,5 +38,15 @@ public class UserService {
 	public List<User> findAllUsers(){
 		return (List<User>) repository.findAll(); // select * to user
 	}
+	
+	@GetMapping("/api/user/{userId}")  // this is mapped to a get request
+	public User findUserById(@PathVariable("userId") int userId){ // parse the userId to an int
+		Optional<User> data = repository.findById(userId); // findById could return null, so we should declare it as Optional from util
+		if(data.isPresent()) {
+			return data.get(); //If a value is present in this Optional, returns the value, otherwise throws NoSuchElementException.
+		} // is this object not null (present)?
+		return null;
+	}
+	
 	
 }
