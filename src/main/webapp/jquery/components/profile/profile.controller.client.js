@@ -6,6 +6,7 @@
     var $staticEmail; // $means this object will be retrieved from DOM by jQuery. It's a jQuery elements
     var $firstName;
     var $lastName;
+    var $updateBtn;
 
 
     function init(){
@@ -13,8 +14,25 @@
         $staticEmail = $("#staticEmail")
         $firstName = $("#firstName");
         $lastName = $("#lastName");
-
+        $updateBtn = $("#updateBtn")
+            .click(updateUser);
         findUserById(22);
+    }
+
+    function updateUser(){
+        var user = {
+            firstName: $firstName.val(),
+            lastName: $lastName.val()
+        }
+
+        userService
+            .updateUser(22,user)
+            .then(success);
+
+    }
+
+    function success(){
+        alert("success");
     }
 
     function findUserById(userId){

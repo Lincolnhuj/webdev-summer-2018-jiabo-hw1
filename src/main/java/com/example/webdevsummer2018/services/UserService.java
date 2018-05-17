@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,20 @@ public class UserService {
 	@GetMapping("/api/user")  // this is mapped to a get request
 	public List<User> findAllUsers(){
 		return (List<User>) repository.findAll(); // select * to user
+	}
+	
+	// a put mapping
+	@PutMapping("/api/user/{userId}")
+	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) { // RequestBody map it to a user object newUser
+		// retrieve the object in the db
+		Optional<User> data = repository.findById(userId); // findById could return null, so we should declare it as Optional from util
+		if(data.isPresent()) {
+			User user = data.get();
+			user.setFirstName(newUser.getFirstName()); // local object
+			repository.save(user);
+			return user;
+		}
+		return null;
 	}
 	
 	@GetMapping("/api/user/{userId}")  // this is mapped to a get request

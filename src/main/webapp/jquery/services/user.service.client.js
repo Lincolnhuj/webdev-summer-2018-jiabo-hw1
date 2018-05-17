@@ -4,10 +4,25 @@ function UserServiceClient(){
 	this.findAllUsers = findAllUsers;
 	this.findUserById = findUserById;
 	this.deleteUser = deleteUser;
-//	this.updateUser = updateUser;
+	this.updateUser = updateUser;
 	this.url =
 		'http://localhost:8080/api/user';
 	var self = this; // self refers to this instance. It will be used later. this only refers to this object, not the whole class.
+
+	function updateUser(userId, user){
+        return fetch(self.url + '/' + userId, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+		})
+		.then(function(response){
+			return response.json();
+		});
+	}
+
+
 
 	function findUserById(userId){
         return fetch(self.url + '/' + userId)
