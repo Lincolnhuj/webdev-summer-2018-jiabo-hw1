@@ -36,7 +36,7 @@
 		
 		userService
 			.createUser(user)
-			.then(findAllUsers); // enable auto refresh after creating a user
+			.then(rerenderAfterCreation(user)); // enable auto refresh after creating a user
 		
 
 	}
@@ -53,11 +53,23 @@
                 .html(user.firstName);
             clone.find('.lastName')
                 .html(user.lastName);
-
 			tbody.append(clone); //  append rows after the table.
 		}
 
 	}
+
+    function rerenderAfterCreation(user){
+            var clone = template.clone(); // in memory Dom element
+            clone.find('.username') // find the class in html.
+                .html(user.username);
+            clone.find('.password')
+                .html(user.password);
+            clone.find('.firstName')
+                .html(user.firstName);
+            clone.find('.lastName')
+                .html(user.lastName);
+            tbody.append(clone); //  append rows after the table.
+    }
 })();
 
 
