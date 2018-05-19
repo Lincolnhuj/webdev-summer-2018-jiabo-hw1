@@ -6,7 +6,7 @@ function UserServiceClient(){
 	this.deleteUser = deleteUser;
 	this.updateUser = updateUser;
 	this.url =
-		'http://localhost:8080/api/user';
+		'http://localhost:8080/api/admin';
 	var self = this; // self refers to this instance. It will be used later. this only refers to this object, not the whole class.
 
 	function updateUser(userId, user){
@@ -26,8 +26,6 @@ function UserServiceClient(){
 		});
 	}
 
-
-
 	function findUserById(userId){
         return fetch(self.url + '/' + userId)
 			.then(function(response){
@@ -42,9 +40,8 @@ function UserServiceClient(){
 		});
 	}
 
-
 	function findAllUsers(){
-        // fetch user from url. Get data from server rather than hard code.
+        // fetch admin from url. Get data from server rather than hard code.
         // default, fetch generates a get.
         // here we won't get a users, but a promise
         // register for the promise call back.
@@ -53,7 +50,6 @@ function UserServiceClient(){
              return response.json(); // We have to convert raw response to json for further use.
         });
 	}
-
 
 	function createUser(user){
 		// send it over the server for storing
@@ -66,6 +62,5 @@ function UserServiceClient(){
 			}
 		}); // return a promise
 	}
-
 
 }

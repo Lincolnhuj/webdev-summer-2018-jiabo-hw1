@@ -22,26 +22,26 @@ public class UserService {
 	@Autowired // instead of us instantiating repo, we ask a framework to inject it into that variable
 	UserRepository repository;
 	
-	@DeleteMapping("/api/user/{userId}") //--->|
+	@DeleteMapping("/api/admin/{userId}") //--->|
 	public void deleteUser(@PathVariable("userId") int id) { // parse the userId to an int
 		repository.deleteById(id);
 	}
 	
 	// enable post
-	@PostMapping("/api/user")
+	@PostMapping("/api/admin")
 	public User createUser(@RequestBody User user) {
 		return repository.save(user); // generate a insert into db. Return the user instance
 	}
 	
 	
 	// exe this function when I ask for all users. Enable get
-	@GetMapping("/api/user")  // this is mapped to a get request
+	@GetMapping("/api/admin")  // this is mapped to a get request
 	public List<User> findAllUsers(){
 		return (List<User>) repository.findAll(); // select * to user
 	}
 	
 	// a put mapping
-	@PutMapping("/api/user/{userId}")
+	@PutMapping("/api/admin/{userId}")
 	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) { // RequestBody map it to a user object newUser
 		// retrieve the object in the db
 		Optional<User> data = repository.findById(userId); // findById could return null, so we should declare it as Optional from util
@@ -54,7 +54,7 @@ public class UserService {
 		return null;
 	}
 	
-	@GetMapping("/api/user/{userId}")  // this is mapped to a get request
+	@GetMapping("/api/admin/{userId}")  // this is mapped to a get request
 	public User findUserById(@PathVariable("userId") int userId){ // parse the userId to an int
 		Optional<User> data = repository.findById(userId); // findById could return null, so we should declare it as Optional from util
 		if(data.isPresent()) {

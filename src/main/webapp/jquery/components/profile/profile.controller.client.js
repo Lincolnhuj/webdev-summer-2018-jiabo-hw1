@@ -10,7 +10,7 @@
 
 
     function init(){
-        // fetch user by id
+        // fetch admin by id
         $staticEmail = $("#staticEmail");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
